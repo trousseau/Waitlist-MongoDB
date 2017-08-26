@@ -1,0 +1,119 @@
+﻿@model IEnumerable<WaitlListMongoDB.Models.Person>
+
+<div class="row">
+    <div class="row partialButtonsBar">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add Party</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exportModal">Export</button>
+    </div>
+
+    <!-- Add Modal -->
+    <div id="addModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Party</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("Create", new WaitlListMongoDB.Models.Person())
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="exportModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Export List</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("Export", new WaitlListMongoDB.Models.Person())
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PartySize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckIn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Seated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckOut)
+        </th>
+        <th>
+            Time Waited
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactInfo.CellPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactInfo.Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.FirstName.ToString(), "Details", new { id = item.Id.ToString() })
+            </td>
+            <td>
+                @Html.ActionLink(item.LastName.ToString(), "Details", new { id = item.Id.ToString() })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartySize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckIn)
+            </td>
+            <td>
+                @item.GetSeated()
+            </td>
+            <td>
+                @item.GetCheckOut()
+            </td>
+            <td>
+                @item.GetTimeWaited()
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.ContactInfo.CellPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.ContactInfo.Email)
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Edit Details", "EditDetails", new { id = item.Id.ToString() }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id.ToString() }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>

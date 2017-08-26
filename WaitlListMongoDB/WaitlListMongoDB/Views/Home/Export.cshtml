@@ -1,0 +1,54 @@
+﻿@model WaitlListMongoDB.Models.Person
+
+@using (Html.BeginForm("ExportList", "Home"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Records to Include")
+            <div class="col-md-10">
+                @Html.RadioButton("Include", "All" ) All &nbsp;
+                @Html.RadioButton("Include", "CurrentList") Current List &nbsp;
+                @Html.RadioButton("Include", "PastList", new { id = "Past_List" }) Past List
+                <br />
+                <div class="reveal-if-active" style="display:none; padding:10px;">
+                    Start Date: @Html.TextBox("StartDate", null, new { type = "date" }) <br />
+                    End Date: @Html.TextBox("EndDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.Label("Export Format")
+            <div class="col-md-10">
+                @Html.RadioButton("FileFormat", "CSV") CSV &nbsp;
+                @Html.RadioButton("FileFormat", "TXT") TXT
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Export" class="btn btn-success" />
+            </div>
+        </div>
+        <br />
+    </div>
+}
+
+<script>
+    var address = $('.reveal-if-active');
+
+    $("[name=Include]").each(function (i) {
+        $(this).click(function () {
+            var selection = $(this).val();
+            if (selection == 'PastList') {
+                address.show();
+            }
+            else {
+                address.hide();
+            }
+        });
+    });
+</script>

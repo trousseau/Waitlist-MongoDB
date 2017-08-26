@@ -1,0 +1,77 @@
+﻿@model WaitlListMongoDB.Models.UserSettings
+
+@if (TempData["notice"] != null)
+{
+    <script>
+        alert("@TempData["notice"]");
+    </script>
+}
+
+@using (Html.BeginForm("SaveAvgWaitTimeSettings","Home"))
+{
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.AvgWaitSettings.BreakfastStartTime)
+
+        @Html.TextBoxFor(t => t.AvgWaitSettings.BreakfastStartTime, "{0:HH:mm}", new { @class = "form-control", @type = "time" })
+        <div>
+            @Html.ValidationMessageFor(Model => Model.AvgWaitSettings.BreakfastStartTime, null, new { @id = "valwarning" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.AvgWaitSettings.BreakfastEndTime)
+
+        @Html.TextBoxFor(y => Model.AvgWaitSettings.BreakfastEndTime, "{0:HH:mm}", new { @class = "form-control", @type = "time" })
+        <div>
+            @Html.ValidationMessageFor(Model => Model.AvgWaitSettings.BreakfastEndTime, null, new { @id = "valwarning" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.AvgWaitSettings.LunchStartTime)
+
+            @Html.TextBoxFor(t => Model.AvgWaitSettings.LunchStartTime, "{0:HH:mm}", new { @class = "form-control", @type = "time" })
+            <div>
+                @Html.ValidationMessageFor(Model => Model.AvgWaitSettings.LunchStartTime, null, new { @id = "valwarning" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.AvgWaitSettings.LunchEndTime)
+
+            @Html.TextBoxFor(y => Model.AvgWaitSettings.LunchEndTime, "{0:HH:mm}", new { @class = "form-control", @type = "time" })
+            <div>
+                @Html.ValidationMessageFor(Model => Model.AvgWaitSettings.LunchEndTime, null, new { @id = "valwarning" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.AvgWaitSettings.DinnerStartTime)
+
+            @Html.TextBoxFor(t => Model.AvgWaitSettings.DinnerStartTime, "{0:HH:mm}", new { @class = "form-control", @type = "time" })
+            <div>
+                @Html.ValidationMessageFor(Model => Model.AvgWaitSettings.DinnerStartTime, null, new { @id = "valwarning" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.AvgWaitSettings.DinnerEndTime)
+
+            @Html.TextBoxFor(y => Model.AvgWaitSettings.DinnerEndTime, "{0:HH:mm}", new { @class = "form-control", @type = "time" })
+            <div>
+                @Html.ValidationMessageFor(Model => Model.AvgWaitSettings.DinnerEndTime, null, new { @id = "valwarning" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.AvgWaitSettings.IncludePastLists)
+
+            @Html.CheckBoxFor(y => Model.AvgWaitSettings.IncludePastLists, new { @class = "checkbox"})
+            <div>
+                @Html.ValidationMessageFor(Model => Model.AvgWaitSettings.IncludePastLists, null, new { @id = "valwarning" })
+            </div>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Save" />
+
+}

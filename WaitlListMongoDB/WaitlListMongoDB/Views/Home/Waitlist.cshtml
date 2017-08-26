@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Waitlist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="headerList" class="row container-body">
+    <h2 id="headerList">Current Waitlist </h2>
+    @Html.ActionLink("View Past List", "PastList",null, new { @id="viewPastList"})
+</div>
+
+<div class="row container-body">
+    <div id="partialContents" data-url="/Home/ListViewAsync">
+        <img src="~/Content/loading.gif" />Loading...
+    </div>
+</div>
+
+<script>
+    $("#partialContents").each(function (index, item) {
+        var url = $(item).data("url");
+        if (url && url.length > 0) {
+            $(item).load(url);
+        }
+    });
+</script>
